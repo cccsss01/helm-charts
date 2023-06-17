@@ -220,6 +220,11 @@ Now you can interact with the Spire agent socket from your own application. The 
 | spiffe-oidc-discovery-provider.telemetry.prometheus.podMonitor.namespace | string | `""` | Override where to install the podMonitor, if not set will use the same namespace as the spiffe-oidc-discovery-provider |
 | spiffe-oidc-discovery-provider.telemetry.prometheus.port | int | `9988` |  |
 | spiffe-oidc-discovery-provider.tolerations | list | `[]` |  |
+| spiffe-oidc-discovery-provider.tools.kubectl.image.pullPolicy | string | `"IfNotPresent"` | The image pull policy |
+| spiffe-oidc-discovery-provider.tools.kubectl.image.registry | string | `"docker.io"` | The OCI registry to pull the image from |
+| spiffe-oidc-discovery-provider.tools.kubectl.image.repository | string | `"rancher/kubectl"` | The repository within the registry |
+| spiffe-oidc-discovery-provider.tools.kubectl.image.tag | string | `""` | Overrides the image tag |
+| spiffe-oidc-discovery-provider.tools.kubectl.image.version | string | `""` | This value is deprecated in favor of tag. (Will be removed in a future release) |
 | spiffe-oidc-discovery-provider.trustDomain | string | `"example.org"` | Set the trust domain to be used for the SPIFFE identifiers |
 | spire-agent.bundleConfigMap | string | `"spire-bundle"` |  |
 | spire-agent.clusterName | string | `"example-cluster"` |  |
@@ -227,6 +232,12 @@ Now you can interact with the Spire agent socket from your own application. The 
 | spire-agent.extraContainers | list | `[]` |  |
 | spire-agent.extraVolumeMounts | list | `[]` |  |
 | spire-agent.extraVolumes | list | `[]` |  |
+| spire-agent.fsGroupFix.image.pullPolicy | string | `"Always"` | The image pull policy |
+| spire-agent.fsGroupFix.image.registry | string | `"cgr.dev"` | The OCI registry to pull the image from |
+| spire-agent.fsGroupFix.image.repository | string | `"chainguard/bash"` | The repository within the registry |
+| spire-agent.fsGroupFix.image.tag | string | `"latest-20230517"` | Overrides the image tag |
+| spire-agent.fsGroupFix.image.version | string | `""` | This value is deprecated in favor of tag. (Will be removed in a future release) |
+| spire-agent.fsGroupFix.resources | object | `{}` | Specify resource needs as per https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/ |
 | spire-agent.fullnameOverride | string | `""` |  |
 | spire-agent.healthChecks.port | int | `9980` | override the host port used for health checking |
 | spire-agent.image.pullPolicy | string | `"IfNotPresent"` | The image pull policy |
@@ -307,11 +318,6 @@ Now you can interact with the Spire agent socket from your own application. The 
 | spire-server.controllerManager.service.port | int | `443` |  |
 | spire-server.controllerManager.service.type | string | `"ClusterIP"` |  |
 | spire-server.controllerManager.validatingWebhookConfiguration.failurePolicy | string | `"Fail"` |  |
-| spire-server.controllerManager.validatingWebhookConfiguration.upgradeHook.image.pullPolicy | string | `"IfNotPresent"` | The image pull policy |
-| spire-server.controllerManager.validatingWebhookConfiguration.upgradeHook.image.registry | string | `"docker.io"` | The OCI registry to pull the image from |
-| spire-server.controllerManager.validatingWebhookConfiguration.upgradeHook.image.repository | string | `"rancher/kubectl"` | The repository within the registry |
-| spire-server.controllerManager.validatingWebhookConfiguration.upgradeHook.image.tag | string | `""` | Overrides the image tag |
-| spire-server.controllerManager.validatingWebhookConfiguration.upgradeHook.image.version | string | `""` | This value is deprecated in favor of tag. (Will be removed in a future release) |
 | spire-server.dataStore.sql.databaseName | string | `"spire"` | Only used by "postgres" or "mysql" |
 | spire-server.dataStore.sql.databaseType | string | `"sqlite3"` | Other supported databases are "postgres" and "mysql" |
 | spire-server.dataStore.sql.host | string | `""` | Only used by "postgres" or "mysql" |
@@ -383,6 +389,11 @@ Now you can interact with the Spire agent socket from your own application. The 
 | spire-server.telemetry.prometheus.podMonitor.labels | object | `{}` |  |
 | spire-server.telemetry.prometheus.podMonitor.namespace | string | `""` | Override where to install the podMonitor, if not set will use the same namespace as the spire-server |
 | spire-server.tolerations | list | `[]` |  |
+| spire-server.tools.kubectl.image.pullPolicy | string | `"IfNotPresent"` | The image pull policy |
+| spire-server.tools.kubectl.image.registry | string | `"docker.io"` | The OCI registry to pull the image from |
+| spire-server.tools.kubectl.image.repository | string | `"rancher/kubectl"` | The repository within the registry |
+| spire-server.tools.kubectl.image.tag | string | `""` | Overrides the image tag |
+| spire-server.tools.kubectl.image.version | string | `""` | This value is deprecated in favor of tag. (Will be removed in a future release) |
 | spire-server.topologySpreadConstraints | list | `[]` |  |
 | spire-server.tornjak.config.dataStore | object | `{"driver":"sqlite3","file":"/run/spire/data/tornjak.sqlite3"}` | persistent DB for storing Tornjak specific information |
 | spire-server.tornjak.enabled | bool | `false` | Deploys Tornjak API (backend) (Not for production) |
@@ -401,10 +412,16 @@ Now you can interact with the Spire agent socket from your own application. The 
 | spire-server.tornjak.startupProbe.successThreshold | int | `1` |  |
 | spire-server.tornjak.startupProbe.timeoutSeconds | int | `5` |  |
 | spire-server.trustDomain | string | `"example.org"` | Set the trust domain to be used for the SPIFFE identifiers |
+| spire-server.upstreamAuthority.certManager.ca.create | bool | `false` | Creates a Cert-Manager CA |
+| spire-server.upstreamAuthority.certManager.ca.duration | string | `"87600h"` | Duration of the CA. Defaults to 10 years. |
+| spire-server.upstreamAuthority.certManager.ca.privateKey.algorithm | string | `"ECDSA"` |  |
+| spire-server.upstreamAuthority.certManager.ca.privateKey.rotationPolicy | string | `""` |  |
+| spire-server.upstreamAuthority.certManager.ca.privateKey.size | int | `256` |  |
+| spire-server.upstreamAuthority.certManager.ca.renewBefore | string | `""` | How long to wait before renewing the CA |
 | spire-server.upstreamAuthority.certManager.enabled | bool | `false` |  |
 | spire-server.upstreamAuthority.certManager.issuer_group | string | `"cert-manager.io"` |  |
 | spire-server.upstreamAuthority.certManager.issuer_kind | string | `"Issuer"` |  |
-| spire-server.upstreamAuthority.certManager.issuer_name | string | `"spire-ca"` |  |
+| spire-server.upstreamAuthority.certManager.issuer_name | string | `""` | Defaults to the release name, override if CA is provided outside of the chart |
 | spire-server.upstreamAuthority.certManager.kube_config_file | string | `""` |  |
 | spire-server.upstreamAuthority.certManager.namespace | string | `""` | Specify to use a namespace other then the one the chart is installed into |
 | spire-server.upstreamAuthority.certManager.rbac.create | bool | `true` |  |
