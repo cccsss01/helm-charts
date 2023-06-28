@@ -6,8 +6,23 @@
 
 A Helm chart to install the SPIFFE CSI driver.
 
+**Homepage:** <https://github.com/spiffe/helm-charts/tree/main/charts/spire>
+
 > **Note**: The recommended version is `0.2.3` to support arm64 nodes. If running with any
 > prior version to `0.2.3` you have to use a `nodeSelector` to limit to `kubernetes.io/arch: amd64`.
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| marcofranssen | <marco.franssen@gmail.com> | <https://marcofranssen.nl> |
+| kfox1111 | <Kevin.Fox@pnnl.gov> |  |
+| faisal-memon | <fymemon@yahoo.com> |  |
+| edwbuck | <edwbuck@gmail.com> |  |
+
+## Source Code
+
+* <https://github.com/spiffe/helm-charts/tree/main/charts/spire>
 
 ## Values
 
@@ -23,6 +38,8 @@ A Helm chart to install the SPIFFE CSI driver.
 | image.version | string | `""` | This value is deprecated in favor of tag. (Will be removed in a future release) |
 | imagePullSecrets | list | `[]` |  |
 | kubeletPath | string | `"/var/lib/kubelet"` |  |
+| livenessProbe.initialDelaySeconds | int | `5` | Initial delay seconds for livenessProbe |
+| livenessProbe.timeoutSeconds | int | `5` | Timeout value in seconds for livenessProbe |
 | nameOverride | string | `""` |  |
 | namespaceOverride | string | `""` |  |
 | nodeDriverRegistrar.image.pullPolicy | string | `"IfNotPresent"` | The image pull policy |

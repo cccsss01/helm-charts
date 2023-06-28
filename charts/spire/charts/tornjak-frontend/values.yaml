@@ -2,6 +2,9 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+# @ignored
+global: {}
+
 image:
   registry: ghcr.io
   repository: spiffe/tornjak-frontend
@@ -71,3 +74,35 @@ apiServerURL: "http://localhost:10000/"  # 👈 Use it for minikube or kind
 spireHealthCheck:
   # -- Enables the SPIRE Healthchecker indicator
   enabled: true
+
+## Configure extra options for Tornjak frontend container's startup probe
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes
+##
+startupProbe:
+  # -- Enable startupProbe on Tornjak frontend container
+  enabled: true
+  # -- Initial delay seconds for startupProbe
+  initialDelaySeconds: 5
+  # -- Period seconds for startupProbe
+  periodSeconds: 10
+  # -- Timeout seconds for startupProbe
+  timeoutSeconds: 5
+  # -- Failure threshold count for startupProbe
+  failureThreshold: 6
+  # -- Success threshold count for startupProbe
+  successThreshold: 1
+
+# @ignored
+tests:
+  bash:
+    image:
+      # -- The OCI registry to pull the image from
+      registry: cgr.dev
+      # -- The repository within the registry
+      repository: chainguard/bash
+      # -- The image pull policy
+      pullPolicy: IfNotPresent
+      # -- This value is deprecated in favor of tag. (Will be removed in a future release)
+      version: ""
+      # -- Overrides the image tag
+      tag: 5.2.15
