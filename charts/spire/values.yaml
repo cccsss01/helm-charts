@@ -14,6 +14,8 @@ global:
     image:
       # -- Override all Spire image registries at once
       registry: ""
+    # -- Set to false to disable production requirements to enable you to kick the tires with spire without needing a lot of configuration.
+    strictChecking: true
 
 #  telemetry:
 #    prometheus:
