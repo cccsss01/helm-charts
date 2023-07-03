@@ -112,8 +112,8 @@ Now you can interact with the Spire agent socket from your own application. The 
 | global.spire.bundleConfigMap | string | `""` | Override all instances of bundleConfigMap |
 | global.spire.clusterName | string | `"example-cluster"` |  |
 | global.spire.image.registry | string | `""` | Override all Spire image registries at once |
-| global.spire.strictChecking | bool | `true` | Set to false to disable production requirements to enable you to kick the tires with spire without needing a lot of configuration. |
 | global.spire.jwtIssuer | string | `"oidc-discovery.example.org"` | Set the jwt issuer |
+| global.spire.strictChecking | bool | `false` | Set to false to disable production requirements to enable you to kick the tires with spire without needing a lot of configuration. |
 | global.spire.trustDomain | string | `"example.org"` | The trust domain to be used for the SPIFFE identifiers |
 | spiffe-csi-driver.enabled | bool | `true` | Enables deployment of CSI driver |
 | spiffe-oidc-discovery-provider.enabled | bool | `false` | Enables deployment of OIDC discovery provider |
