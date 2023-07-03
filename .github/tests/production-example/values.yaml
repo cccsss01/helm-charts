@@ -8,8 +8,3 @@ spire-server:
   ca_subject:
     organization: Production
     common_name: production.other
-
-spiffe-oidc-discovery-provider:
-  config:
-    domains:
-      - oidc-discovery.production.other
