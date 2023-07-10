@@ -14,6 +14,8 @@ Installed {{ include "spire-tornjak.fullname" . }}…
 Tornjak runs without authentication and is therefore NOT suitable to run in production environments.
 Only use in test environments!
 
+Using connection type: {{ include "spire-tornjak.connectionType" . }}
+
 Access Tornjak:
    kubectl -n {{ include "spire-server.namespace" . }} port-forward service/{{ include "spire-tornjak.servicename" . }} {{ .Values.tornjak.service.portHttp }}:10080
 {{- if eq (include "spire-tornjak.connectionType" .) "http" }}

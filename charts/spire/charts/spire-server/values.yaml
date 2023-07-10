@@ -358,7 +358,7 @@ tornjak:
     # -- This value is deprecated in favor of tag. (Will be removed in a future release)
     version: ""
     # -- Overrides the image tag
-    tag: "v1.2.2"
+    tag: "v1.4.0"
 
   service:
     type: ClusterIP
@@ -389,7 +389,7 @@ tornjak:
 
     # -- Name of the secret containing server side key and certificate for TLS verification
     # (required for `tls` or `mtls` connectionType)
-    tlsSecret: tornjak-tls-secret
+    tlsSecret: tornjak-server-tls
     userCA:
       # -- Type of delivery for the user CA for mTLS client verification
       # options are `Secret` or `ConfigMap`

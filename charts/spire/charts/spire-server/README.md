@@ -48,7 +48,7 @@ Complete instruction on creating your own TLS certificate can be found [here](ht
 TLS Certificate and the private key must be provided to Tornjak via *TLS Secret*. Prior to deploying this Helm chart, create TLS Secret in the deployment namespace (e.g. `spire-server`)
 
 ```console
-kubectl -n spire-server create secret tls tornjak-tls-secret --cert=client.crt --key=client.key
+kubectl -n spire-server create secret tls tornjak-server-tls --cert=client.crt --key=client.key
 ```
 
 Once the charts are deployed, you can test the TLS connection with the following command (assuming localhost):
@@ -199,14 +199,14 @@ In order to run Tornjak with simple HTTP Connection only, make sure you don't cr
 | tools.kubectl.image.version | string | `""` | This value is deprecated in favor of tag. (Will be removed in a future release) |
 | topologySpreadConstraints | list | `[]` |  |
 | tornjak.config.dataStore | object | `{"driver":"sqlite3","file":"/run/spire/data/tornjak.sqlite3"}` | Persistent DB for storing Tornjak specific information |
-| tornjak.config.tlsSecret | string | `"tornjak-tls-secret"` | Name of the secret containing server side key and certificate for TLS verification (required for `tls` or `mtls` connectionType) |
+| tornjak.config.tlsSecret | string | `"tornjak-server-tls"` | Name of the secret containing server side key and certificate for TLS verification (required for `tls` or `mtls` connectionType) |
 | tornjak.config.userCA.name | string | `"tornjak-user-ca"` |  |
 | tornjak.config.userCA.type | string | `"Secret"` | Type of delivery for the user CA for mTLS client verification options are `Secret` or `ConfigMap` (required for `mtls` connectionType) |
 | tornjak.enabled | bool | `false` | Deploys Tornjak API (backend) (Not for production) |
 | tornjak.image.pullPolicy | string | `"IfNotPresent"` | The Tornjak image pull policy |
 | tornjak.image.registry | string | `"ghcr.io"` | The OCI registry to pull the Tornjak image from |
 | tornjak.image.repository | string | `"spiffe/tornjak-backend"` | The repository within the registry |
-| tornjak.image.tag | string | `"v1.2.2"` | Overrides the image tag |
+| tornjak.image.tag | string | `"v1.4.0"` | Overrides the image tag |
 | tornjak.image.version | string | `""` | This value is deprecated in favor of tag. (Will be removed in a future release) |
 | tornjak.resources | object | `{}` |  |
 | tornjak.service.annotations | object | `{}` |  |
