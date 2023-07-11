@@ -17,7 +17,7 @@ Only use in test environments!
 Using connection type: {{ include "spire-tornjak.connectionType" . }}
 
 Access Tornjak:
-   kubectl -n {{ include "spire-server.namespace" . }} port-forward service/{{ include "spire-tornjak.servicename" . }} {{ .Values.tornjak.service.portHttp }}:10080
+   kubectl -n {{ include "spire-server.namespace" . }} port-forward service/{{ include "spire-tornjak.servicename" . }} {{ .Values.tornjak.service.portHttp }}:10000
 {{- if eq (include "spire-tornjak.connectionType" .) "http" }}
   Open browser to: http://localhost:{{ .Values.tornjak.service.portHttp }}
 {{- else if eq (include "spire-tornjak.connectionType" .) "tls" }}

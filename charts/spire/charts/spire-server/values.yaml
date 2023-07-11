@@ -362,7 +362,7 @@ tornjak:
 
   service:
     type: ClusterIP
-    portHttp: 10080
+    portHttp: 10000
     portHttps: 10443
     annotations: {}
 

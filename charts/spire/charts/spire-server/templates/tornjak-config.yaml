@@ -9,7 +9,7 @@ data:
     server {
       spire_socket_path = "unix:///tmp/spire-server/private/api.sock" # socket to communicate with SPIRE server
       http {
-        port = "10080" # opens HTTP listen port at specified container port
+        port = "10000" # opens HTTP listen port at specified container port
       }
       {{- if or (eq (include "spire-tornjak.connectionType" .) "tls") (eq (include "spire-tornjak.connectionType" .) "mtls") }}
       https {

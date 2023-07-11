@@ -210,7 +210,7 @@ In order to run Tornjak with simple HTTP Connection only, make sure you don't cr
 | tornjak.image.version | string | `""` | This value is deprecated in favor of tag. (Will be removed in a future release) |
 | tornjak.resources | object | `{}` |  |
 | tornjak.service.annotations | object | `{}` |  |
-| tornjak.service.portHttp | int | `10080` |  |
+| tornjak.service.portHttp | int | `10000` |  |
 | tornjak.service.portHttps | int | `10443` |  |
 | tornjak.service.type | string | `"ClusterIP"` |  |
 | tornjak.startupProbe.failureThreshold | int | `3` |  |
