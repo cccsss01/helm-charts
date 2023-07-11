@@ -153,6 +153,7 @@ jobs:
       - name: Run chart-testing (install)
         run: |
           ct install --config ct.yaml \
+            --github-groups \
             --target-branch ${{ github.base_ref }}
 
       - name: Test summary
