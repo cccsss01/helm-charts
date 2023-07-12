@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.8.1](https://img.shields.io/badge/Version-0.8.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.7.0](https://img.shields.io/badge/AppVersion-1.7.0-informational?style=flat-square)
+![Version: 0.10.1](https://img.shields.io/badge/Version-0.10.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.7.0](https://img.shields.io/badge/AppVersion-1.7.0-informational?style=flat-square)
 [![Development Phase](https://github.com/spiffe/spiffe/blob/main/.img/maturity/dev.svg)](https://github.com/spiffe/spiffe/blob/main/MATURITY.md#development)
 
 A Helm chart for deploying the complete Spire stack including: spire-server, spire-agent, spiffe-csi-driver, spiffe-oidc-discovery-provider and spire-controller-manager.
@@ -112,6 +112,7 @@ Now you can interact with the Spire agent socket from your own application. The 
 | global.spire.bundleConfigMap | string | `""` | Override all instances of bundleConfigMap |
 | global.spire.clusterName | string | `"example-cluster"` |  |
 | global.spire.image.registry | string | `""` | Override all Spire image registries at once |
+| global.spire.jwtIssuer | string | `"oidc-discovery.example.org"` | Set the jwt issuer |
 | global.spire.trustDomain | string | `"example.org"` | The trust domain to be used for the SPIFFE identifiers |
 | spiffe-csi-driver.enabled | bool | `true` | Enables deployment of CSI driver |
 | spiffe-oidc-discovery-provider.enabled | bool | `false` | Enables deployment of OIDC discovery provider |
@@ -152,6 +153,7 @@ Now you can interact with the Spire agent socket from your own application. The 
 | spiffe-csi-driver.serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | spiffe-csi-driver.serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | spiffe-csi-driver.serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| spiffe-csi-driver.tolerations | list | `[]` |  |
 | spiffe-oidc-discovery-provider.affinity | object | `{}` |  |
 | spiffe-oidc-discovery-provider.agentSocketName | string | `"spire-agent.sock"` | The name of the spire-agent unix socket |
 | spiffe-oidc-discovery-provider.autoscaling.enabled | bool | `false` |  |
@@ -164,8 +166,7 @@ Now you can interact with the Spire agent socket from your own application. The 
 | spiffe-oidc-discovery-provider.config.acme.directoryUrl | string | `"https://acme-v02.api.letsencrypt.org/directory"` |  |
 | spiffe-oidc-discovery-provider.config.acme.emailAddress | string | `"letsencrypt@example.org"` |  |
 | spiffe-oidc-discovery-provider.config.acme.tosAccepted | bool | `false` |  |
-| spiffe-oidc-discovery-provider.config.domains[0] | string | `"localhost"` |  |
-| spiffe-oidc-discovery-provider.config.domains[1] | string | `"oidc-discovery.example.org"` |  |
+| spiffe-oidc-discovery-provider.config.additionalDomains | list | `["localhost"]` | Add additional domains that can be used for oidc discovery |
 | spiffe-oidc-discovery-provider.config.logLevel | string | `"info"` | The log level, valid values are "debug", "info", "warn", and "error" |
 | spiffe-oidc-discovery-provider.configMap.annotations | object | `{}` | Annotations to add to the SPIFFE OIDC Discovery Provider ConfigMap |
 | spiffe-oidc-discovery-provider.fullnameOverride | string | `""` |  |
@@ -189,6 +190,7 @@ Now you can interact with the Spire agent socket from your own application. The 
 | spiffe-oidc-discovery-provider.insecureScheme.nginx.image.tag | string | `"1.24.0-alpine"` | Overrides the image tag |
 | spiffe-oidc-discovery-provider.insecureScheme.nginx.image.version | string | `""` | This value is deprecated in favor of tag. (Will be removed in a future release) |
 | spiffe-oidc-discovery-provider.insecureScheme.nginx.resources | object | `{}` |  |
+| spiffe-oidc-discovery-provider.jwtIssuer | string | `"oidc-discovery.example.org"` |  |
 | spiffe-oidc-discovery-provider.livenessProbe.initialDelaySeconds | int | `5` | Initial delay seconds for livenessProbe |
 | spiffe-oidc-discovery-provider.livenessProbe.periodSeconds | int | `5` | Period seconds for livenessProbe |
 | spiffe-oidc-discovery-provider.nameOverride | string | `""` |  |
@@ -234,7 +236,7 @@ Now you can interact with the Spire agent socket from your own application. The 
 | spire-agent.fsGroupFix.image.pullPolicy | string | `"Always"` | The image pull policy |
 | spire-agent.fsGroupFix.image.registry | string | `"cgr.dev"` | The OCI registry to pull the image from |
 | spire-agent.fsGroupFix.image.repository | string | `"chainguard/bash"` | The repository within the registry |
-| spire-agent.fsGroupFix.image.tag | string | `"latest-20230517"` | Overrides the image tag |
+| spire-agent.fsGroupFix.image.tag | string | `"5.2.15"` | Overrides the image tag |
 | spire-agent.fsGroupFix.image.version | string | `""` | This value is deprecated in favor of tag. (Will be removed in a future release) |
 | spire-agent.fsGroupFix.resources | object | `{}` | Specify resource needs as per https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/ |
 | spire-agent.fullnameOverride | string | `""` |  |
@@ -271,6 +273,7 @@ Now you can interact with the Spire agent socket from your own application. The 
 | spire-agent.telemetry.prometheus.podMonitor.labels | object | `{}` |  |
 | spire-agent.telemetry.prometheus.podMonitor.namespace | string | `""` | Override where to install the podMonitor, if not set will use the same namespace as the spire-agent |
 | spire-agent.telemetry.prometheus.port | int | `9988` |  |
+| spire-agent.tolerations | list | `[]` |  |
 | spire-agent.trustBundleFormat | string | `"pem"` | If using trustBundleURL, what format is the url. Choices are "pem" and "spiffe" |
 | spire-agent.trustBundleURL | string | `""` | If set, obtain trust bundle from url instead of Kubernetes ConfigMap |
 | spire-agent.trustDomain | string | `"example.org"` | The trust domain to be used for the SPIFFE identifiers |
@@ -300,6 +303,7 @@ Now you can interact with the Spire agent socket from your own application. The 
 | spire-server.controllerManager.enabled | bool | `false` |  |
 | spire-server.controllerManager.identities.dnsNameTemplates | list | `[]` |  |
 | spire-server.controllerManager.identities.enabled | bool | `true` |  |
+| spire-server.controllerManager.identities.federatesWith | list | `[]` |  |
 | spire-server.controllerManager.identities.namespaceSelector | object | `{}` |  |
 | spire-server.controllerManager.identities.podSelector | object | `{}` |  |
 | spire-server.controllerManager.identities.spiffeIDTemplate | string | `"spiffe://{{ .TrustDomain }}/ns/{{ .PodMeta.Namespace }}/sa/{{ .PodSpec.ServiceAccountName }}"` |  |
@@ -309,7 +313,7 @@ Now you can interact with the Spire agent socket from your own application. The 
 | spire-server.controllerManager.image.pullPolicy | string | `"IfNotPresent"` | The image pull policy |
 | spire-server.controllerManager.image.registry | string | `"ghcr.io"` | The OCI registry to pull the image from |
 | spire-server.controllerManager.image.repository | string | `"spiffe/spire-controller-manager"` | The repository within the registry |
-| spire-server.controllerManager.image.tag | string | `"0.2.2"` | Overrides the image tag |
+| spire-server.controllerManager.image.tag | string | `"0.2.3"` | Overrides the image tag |
 | spire-server.controllerManager.image.version | string | `""` | This value is deprecated in favor of tag. (Will be removed in a future release) |
 | spire-server.controllerManager.resources | object | `{}` |  |
 | spire-server.controllerManager.securityContext | object | `{}` |  |

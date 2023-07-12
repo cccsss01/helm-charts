@@ -38,7 +38,7 @@ A Helm chart to install the SPIRE agent.
 | fsGroupFix.image.pullPolicy | string | `"Always"` | The image pull policy |
 | fsGroupFix.image.registry | string | `"cgr.dev"` | The OCI registry to pull the image from |
 | fsGroupFix.image.repository | string | `"chainguard/bash"` | The repository within the registry |
-| fsGroupFix.image.tag | string | `"latest-20230517"` | Overrides the image tag |
+| fsGroupFix.image.tag | string | `"5.2.15"` | Overrides the image tag |
 | fsGroupFix.image.version | string | `""` | This value is deprecated in favor of tag. (Will be removed in a future release) |
 | fsGroupFix.resources | object | `{}` | Specify resource needs as per https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/ |
 | fullnameOverride | string | `""` |  |
@@ -75,6 +75,7 @@ A Helm chart to install the SPIRE agent.
 | telemetry.prometheus.podMonitor.labels | object | `{}` |  |
 | telemetry.prometheus.podMonitor.namespace | string | `""` | Override where to install the podMonitor, if not set will use the same namespace as the spire-agent |
 | telemetry.prometheus.port | int | `9988` |  |
+| tolerations | list | `[]` |  |
 | trustBundleFormat | string | `"pem"` | If using trustBundleURL, what format is the url. Choices are "pem" and "spiffe" |
 | trustBundleURL | string | `""` | If set, obtain trust bundle from url instead of Kubernetes ConfigMap |
 | trustDomain | string | `"example.org"` | The trust domain to be used for the SPIFFE identifiers |
